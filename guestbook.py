@@ -142,6 +142,6 @@ app = webapp2.WSGIApplication([
     ('/sign', Guestbook),
     ('/about', About),
     ('/contact', Contact),
-    ('/faq'), FAQ),
+    ('/faq', FAQ),
 ], debug=True)
 # [END app]
