@@ -121,7 +121,19 @@ class About(webapp2.RequestHandler):
 
     def get(self):
         self.response.headers['Content-Type'] = 'text/plain'
-        self.response.write('Hello, World!')
+        self.response.write('About Us')
+
+class Contact(webapp2.RequestHandler):
+
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/plain'
+        self.response.write('Contact Us')
+
+class FAQ(webapp2.RequestHandler):
+
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/plain'
+        self.response.write('FAQ')
 
 
 # [START app]
@@ -129,5 +141,7 @@ app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/sign', Guestbook),
     ('/about', About),
+    ('/contact', Contact),
+    ('/faq'), FAQ),
 ], debug=True)
 # [END app]
