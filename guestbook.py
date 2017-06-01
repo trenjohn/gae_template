@@ -127,7 +127,7 @@ class Contact(webapp2.RequestHandler):
 
     def get(self):
         template = JINJA_ENVIRONMENT.get_template('contact.html')
-        self.response.write(template)
+        self.response.write(template.render)
 
 class FAQ(webapp2.RequestHandler):
 
