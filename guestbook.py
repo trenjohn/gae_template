@@ -126,8 +126,8 @@ class About(webapp2.RequestHandler):
 class Contact(webapp2.RequestHandler):
 
     def get(self):
-        self.response.headers['Content-Type'] = 'text/plain'
-        self.response.write('Contact Us')
+        template = JINJA_ENVIRONMENT.get_template('contact.html')
+        self.response.write(template)
 
 class FAQ(webapp2.RequestHandler):
 
