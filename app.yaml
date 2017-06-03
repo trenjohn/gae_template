@@ -16,7 +16,7 @@ handlers:
   upload: contact\.html
 
 - url: /.*
-  script: guestbook.app
+  script: app.app
 # [END handlers]
 
 # [START libraries]

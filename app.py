@@ -15,6 +15,7 @@
 # limitations under the License.
 
 # [START imports]
+from models import *
 import os
 import urllib
 
@@ -31,8 +32,6 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 # [END imports]
 
 DEFAULT_GUESTBOOK_NAME = 'default_guestbook'
-
-
 # We set a parent key on the 'Greetings' to ensure that they are all
 # in the same entity group. Queries across the single entity group
 # will be consistent. However, the write rate should be limited to
@@ -44,21 +43,6 @@ def guestbook_key(guestbook_name=DEFAULT_GUESTBOOK_NAME):
     We use guestbook_name as the key.
     """
     return ndb.Key('Guestbook', guestbook_name)
-
-
-# [START greeting]
-class Author(ndb.Model):
-    """Sub model for representing an author."""
-    identity = ndb.StringProperty(indexed=False)
-    email = ndb.StringProperty(indexed=False)
-
-
-class Greeting(ndb.Model):
-    """A main model for representing an individual Guestbook entry."""
-    author = ndb.StructuredProperty(Author)
-    content = ndb.StringProperty(indexed=False)
-    date = ndb.DateTimeProperty(auto_now_add=True)
-# [END greeting]
 
 
 # [START main_page]
@@ -117,6 +101,50 @@ class Guestbook(webapp2.RequestHandler):
         self.redirect('/?' + urllib.urlencode(query_params))
 # [END guestbook]
 
+class AccountPage(webapp2.RequestHandler):
+
+    def get(self):
+        a = Account()
+        a.firstName ='Trent'
+        a.lastName='Johnson'
+        a.email='trent.matt.j@gmail.com'
+
+        g1 = Game()
+        g1.numberPlayers = 10
+        g1.entryFee = 5.00
+
+        g2 = Game()
+        g2.numberPlayers = 6
+        g2.entryFee = 10.00
+
+        g1result = g1.put()
+        g2result = g2.put()
+
+        myusergames = UserGames(gameKey = [g1result,g2result])
+        myusergamesresult = myusergames.put()
+
+        a.userGames = myusergamesresult
+
+        result = a.put()
+
+        acc = result.get()
+        usergamelist = acc.userGames
+        u = usergamelist.get()
+
+        self.response.headers['Content-Type'] = 'text/plain'
+        self.response.write(acc) #writes user object
+        self.response.write('\n\n')
+        self.response.write(acc.userGames) #writes
+        self.response.write('\n\n')
+        self.response.write(u)
+        self.response.write('\n\n')
+        for game in u.gameKey:
+            blah = game.get()
+            self.response.write(blah)
+
+        #for game in u:
+        #    self.response.write(game.get())
+
 class About(webapp2.RequestHandler):
 
     def get(self):
@@ -143,5 +171,6 @@ app = webapp2.WSGIApplication([
     ('/about', About),
     ('/contact', Contact),
     ('/faq', FAQ),
+    ('/account', AccountPage),
 ], debug=True)
 # [END app]
