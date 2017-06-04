@@ -178,7 +178,7 @@ class CreateGames(webapp2.RequestHandler):
 
         al = Game.query(Game.numberPlayers == 10)
 
-        while len(al) < 100:
+        while al.count < 100:
             g = Game()
             g.numberPlayers = 10
             g.entryFee = 5.00
