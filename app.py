@@ -19,6 +19,7 @@ from models import *
 from tasks import *
 import os
 import urllib
+import logging
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
@@ -185,9 +186,9 @@ class CreateGames(webapp2.RequestHandler):
             gspot = Game()
             gspot.numberPlayers = 10
             gspot.entryFee = 5.00
-            gspot.put()
+            result = gspot.put()
             counter = counter + 1
-            print counter
+            logging.debug(counter + ':  ' + result)
 
 # [START app]
 app = webapp2.WSGIApplication([
