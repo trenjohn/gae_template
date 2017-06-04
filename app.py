@@ -182,7 +182,8 @@ class CreateGames(webapp2.RequestHandler):
             g = Game()
             g.numberPlayers = 10
             g.entryFee = 5.00
-            g.put()
+            al.append(g)
+            al.put()
 
 # [START app]
 app = webapp2.WSGIApplication([
