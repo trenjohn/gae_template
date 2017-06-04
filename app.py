@@ -172,6 +172,17 @@ class FAQ(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/plain'
         self.response.write('FAQ')
 
+class CreateGames(webapp2.RequestHandler):
+
+    def get(self):
+
+        al = Game.query(Game.numberPlayers == 10)
+
+        while len(al) < 100:
+            g = Game()
+            g.numberPlayers = 10
+            g.entryFee = 5.00
+            g.put()
 
 # [START app]
 app = webapp2.WSGIApplication([
