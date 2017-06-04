@@ -16,7 +16,7 @@ handlers:
   upload: contact\.html
 
 - url: /tasks/create_games
-  script: tasks.app
+  script: tasks.py
 
 - url: /.*
   script: app.app
