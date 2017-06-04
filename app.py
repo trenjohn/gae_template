@@ -187,6 +187,7 @@ class CreateGames(webapp2.RequestHandler):
             gspot.entryFee = 5.00
             gspot.put()
             counter = counter + 1
+            print counter
 
 # [START app]
 app = webapp2.WSGIApplication([
