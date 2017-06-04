@@ -178,12 +178,15 @@ class CreateGames(webapp2.RequestHandler):
 
         al = Game.query(Game.numberPlayers == 10)
 
+        counter = 0
+
         while al.count < 100:
-            g = Game()
-            g.numberPlayers = 10
-            g.entryFee = 5.00
-            al.append(g)
-            al.put()
+            gspot = 'g' + str(counter)
+            gspot = Game()
+            gspot.numberPlayers = 10
+            gspot.entryFee = 5.00
+            gspot.put()
+            counter = counter + 1
 
 # [START app]
 app = webapp2.WSGIApplication([
