@@ -16,6 +16,7 @@
 
 # [START imports]
 from models import *
+from tasks import *
 import os
 import urllib
 
@@ -145,6 +146,14 @@ class AccountPage(webapp2.RequestHandler):
         #for game in u:
         #    self.response.write(game.get())
 
+class Lobby(webapp2.RequestHandler):
+
+    def get(self):
+        g  = Game.query(Game.numberPlayers == 10)
+        self.response.headers['Content-Type'] = 'text/plain'
+        for game in g:
+            self.response.write(game)
+
 class About(webapp2.RequestHandler):
 
     def get(self):
@@ -172,5 +181,7 @@ app = webapp2.WSGIApplication([
     ('/contact', Contact),
     ('/faq', FAQ),
     ('/account', AccountPage),
+    ('/tasks/create_games', CreateGames),
+    ('/lobby', Lobby),
 ], debug=True)
 # [END app]

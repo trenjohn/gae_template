@@ -1,0 +1,4 @@
+cron:
+- description: "create new games"
+  url: /tasks/create_games
+  schedule: every 1 minutes
