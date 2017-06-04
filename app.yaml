@@ -15,9 +15,6 @@ handlers:
   static_files: contact.html
   upload: contact\.html
 
-# - url: /tasks/create_games
-#   script: tasks.app
-
 - url: /.*
   script: app.app
 # [END handlers]

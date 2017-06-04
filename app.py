@@ -151,9 +151,30 @@ class Lobby(webapp2.RequestHandler):
 
     def get(self):
         g  = Game.query(Game.numberPlayers == 10)
-        self.response.headers['Content-Type'] = 'text/plain'
-        for game in g:
-            self.response.write(game)
+
+        user = users.get_current_user()
+        if user:
+            url = users.create_logout_url(self.request.uri)
+            url_linktext = 'Logout'
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Login'
+
+        path = os.path.dirname(__file__)
+
+        template_values = {
+            'user': user,
+            'games': g,
+            'url': url,
+            'url_linktext': url_linktext,
+            'path': path,
+        }
+
+        template = JINJA_ENVIRONMENT.get_template('lobby.html')
+        self.response.write(template.render(template_values))
+        # self.response.headers['Content-Type'] = 'text/plain'
+        # for game in g:
+        #     self.response.write(game)
 
 class About(webapp2.RequestHandler):
 
