@@ -160,14 +160,11 @@ class Lobby(webapp2.RequestHandler):
             url = users.create_login_url(self.request.uri)
             url_linktext = 'Login'
 
-        path = os.path.dirname(__file__)
-
         template_values = {
             'user': user,
             'games': g,
             'url': url,
             'url_linktext': url_linktext,
-            'path': path,
         }
 
         template = JINJA_ENVIRONMENT.get_template('lobby.html')
