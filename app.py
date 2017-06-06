@@ -203,6 +203,24 @@ class CreateGames(webapp2.RequestHandler):
             gspot.entryFee = 5.00
             result = gspot.put()
 
+class GamePage(webapp2.RequestHandler):
+
+    def get(self):
+
+        url = self.request.url
+        url.split(“/”)
+        self.response.headers['Content-Type'] = 'text/plain'
+        for item in url:
+            self.response.write(item)
+        # 
+        # al = Game.query(Game.numberPlayers == 10)
+        #
+        # while al.count(limit=None) < 100:
+        #     gspot = Game()
+        #     gspot.numberPlayers = 10
+        #     gspot.entryFee = 5.00
+        #     result = gspot.put()
+
 # [START app]
 app = webapp2.WSGIApplication([
     ('/', MainPage),
@@ -213,5 +231,6 @@ app = webapp2.WSGIApplication([
     ('/account', AccountPage),
     ('/tasks/create_games', CreateGames),
     ('/lobby', Lobby),
+    ('/g/(.*)', GamePage),
 ], debug=True)
 # [END app]
