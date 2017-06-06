@@ -210,7 +210,10 @@ class GamePage(webapp2.RequestHandler):
         # url = self.request.url
         # url.split('/')
         self.response.headers['Content-Type'] = 'text/plain'
-        self.response.write('Game Page!')
+        try:
+            self.response.write('Game Page!')
+        except:
+            self.response.write(e)
         # for item in url:
         #     self.response.write(item)
         #
