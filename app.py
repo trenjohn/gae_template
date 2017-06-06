@@ -205,18 +205,14 @@ class CreateGames(webapp2.RequestHandler):
 
 class GamePage(webapp2.RequestHandler):
 
-    def get(self):
+    def get(self, url):
 
-        # url = self.request.url
-        # url.split('/')
+        url = self.request.url
+        url.split('/')
         self.response.headers['Content-Type'] = 'text/plain'
-        try:
-            self.response.write('Game Page!')
-        except:
-            self.response.write(e)
-        # for item in url:
-        #     self.response.write(item)
-        #
+        for item in url:
+            self.response.write(item)
+        
         # al = Game.query(Game.numberPlayers == 10)
         #
         # while al.count(limit=None) < 100:
