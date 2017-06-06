@@ -244,16 +244,14 @@ class GamePage(webapp2.RequestHandler):
         game.put()
 
         query_params = {'game': gameID}
-        self.redirect('/?' + urllib.urlencode(query_params))
+        self.redirect('/e/' + urllib.urlencode(query_params))
 
+class SignedUp(webapp2.RequestHandler):
 
-        # al = Game.query(Game.numberPlayers == 10)
-        #
-        # while al.count(limit=None) < 100:
-        #     gspot = Game()
-        #     gspot.numberPlayers = 10
-        #     gspot.entryFee = 5.00
-        #     result = gspot.put()
+    def get(self, url):
+
+        self.response.headers['Content-Type'] = 'text/plain'
+        self.response.write('You are signed up!')
 
 # [START app]
 app = webapp2.WSGIApplication([
@@ -266,5 +264,6 @@ app = webapp2.WSGIApplication([
     ('/tasks/create_games', CreateGames),
     ('/lobby', Lobby),
     ('/g/(.*)', GamePage),
+    ('/e/(.*)', SignedUp),
 ], debug=True)
 # [END app]
