@@ -242,15 +242,17 @@ class GamePage(webapp2.RequestHandler):
         game = Game()
         game = game.get_by_id(gameID)
 
-        data = json.loads({'users': [{'1':'trenjohn'}]})
+        #data = json.loads({'users': [{'1':'trenjohn'}]})
 
-        game.usersSignedUp.append(data)
+        current = game.usersSignedUp
+        current = current + 1
 
+        game.usersSignedUp = current
 
         game.put()
 
         #query_params = {'game': gameID}
-        self.redirect(url + '/currentuserid')
+        #self.redirect(url + '/currentuserid')
 
 class SignedUp(webapp2.RequestHandler):
 
