@@ -197,9 +197,9 @@ class CreateGames(webapp2.RequestHandler):
 
         al = Game.query(Game.numberPlayers == 10)
 
-        while al.count(limit=None) < 100:
+        while al.count(limit=None) < 10:
             gspot = Game()
-            gspot.numberPlayers = 10
+            gspot.numberPlayers = 1
             gspot.entryFee = 5.00
             result = gspot.put()
 
@@ -208,11 +208,45 @@ class GamePage(webapp2.RequestHandler):
     def get(self, url):
 
         url = self.request.url
-        url.split('/')
-        self.response.headers['Content-Type'] = 'text/plain'
-        for item in url:
-            self.response.write(item)
-        
+        gameID = os.path.basename(os.path.normpath(url))
+        gameID = int(gameID)
+        game = Game()
+        game = game.get_by_id(gameID)
+
+        user = users.get_current_user()
+        if user:
+            url = users.create_logout_url(self.request.uri)
+            url_linktext = 'Logout'
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Login'
+
+        template_values = {
+            'user': user,
+            'game': game,
+            'url': url,
+            'url_linktext': url_linktext,
+        }
+
+        template = JINJA_ENVIRONMENT.get_template('gamepage.html')
+        self.response.write(template.render(template_values))
+
+    def post(self):
+
+        gameID = self.request.get('gameID')
+
+        gameID = int(gameID)
+        game = Game()
+        game = game.get_by_id(gameID)
+
+        game.usersSignedUp.append('FUCK YA BABAAYYY!')
+
+        game.put()
+
+        query_params = {'game': gameID}
+        self.redirect('/?' + urllib.urlencode(query_params))
+
+
         # al = Game.query(Game.numberPlayers == 10)
         #
         # while al.count(limit=None) < 100:
