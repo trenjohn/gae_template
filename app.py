@@ -236,8 +236,8 @@ class GamePage(webapp2.RequestHandler):
     def post(self, url):
 
         url = self.request.url
-
-        gameID = self.request.get('gameID')
+        gameID = os.path.basename(os.path.normpath(url))
+        #gameID = self.request.get('gameID')
 
         #gameID = int(gameID)
         game = Game()
@@ -250,7 +250,7 @@ class GamePage(webapp2.RequestHandler):
 
         game.usersSignedUp = current
 
-        game.put()
+        result = game.put()
 
         #query_params = {'game': gameID}
         self.redirect(url)
