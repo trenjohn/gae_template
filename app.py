@@ -150,7 +150,7 @@ class AccountPage(webapp2.RequestHandler):
 class Lobby(webapp2.RequestHandler):
 
     def get(self):
-        g  = Game.query(Game.numberPlayers == 10)
+        g  = Game.query(Game.numberPlayers == 1)
 
         user = users.get_current_user()
         if user:
