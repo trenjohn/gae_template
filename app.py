@@ -236,19 +236,17 @@ class GamePage(webapp2.RequestHandler):
     def post(self, url):
 
         url = self.request.url
+        gameID = int(gameID)
         gameID = os.path.basename(os.path.normpath(url))
-        #gameID = self.request.get('gameID')
-
-        #gameID = int(gameID)
         game = Game()
         game = game.get_by_id(gameID)
 
         #data = json.loads({'users': [{'1':'trenjohn'}]})
 
         current = game.usersSignedUp
-        current = current + 1
+        new = current + 1
 
-        game.usersSignedUp = current
+        game.usersSignedUp = new
 
         result = game.put()
 
