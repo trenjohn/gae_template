@@ -202,6 +202,7 @@ class CreateGames(webapp2.RequestHandler):
             gspot = Game()
             gspot.numberPlayers = 1
             gspot.entryFee = 5.00
+            gspot.usersSignedUp = 0
             result = gspot.put()
 
 class GamePage(webapp2.RequestHandler):
