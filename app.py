@@ -208,11 +208,11 @@ class GamePage(webapp2.RequestHandler):
     def get(self):
 
         url = self.request.url
-        url.split(“/”)
+        url.split('/')
         self.response.headers['Content-Type'] = 'text/plain'
         for item in url:
             self.response.write(item)
-        # 
+        #
         # al = Game.query(Game.numberPlayers == 10)
         #
         # while al.count(limit=None) < 100:
