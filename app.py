@@ -236,8 +236,8 @@ class GamePage(webapp2.RequestHandler):
     def post(self, url):
 
         url = self.request.url
-        gameID = int(gameID)
         gameID = os.path.basename(os.path.normpath(url))
+        gameID = int(gameID)
         game = Game()
         game = game.get_by_id(gameID)
 
