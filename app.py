@@ -238,7 +238,7 @@ class GamePage(webapp2.RequestHandler):
 
         gameID = self.request.get('gameID')
 
-        gameID = int(gameID)
+        #gameID = int(gameID)
         game = Game()
         game = game.get_by_id(gameID)
 
@@ -252,7 +252,7 @@ class GamePage(webapp2.RequestHandler):
         game.put()
 
         #query_params = {'game': gameID}
-        #self.redirect(url + '/currentuserid')
+        self.redirect(url)
 
 class SignedUp(webapp2.RequestHandler):
 
