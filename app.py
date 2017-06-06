@@ -232,7 +232,9 @@ class GamePage(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('gamepage.html')
         self.response.write(template.render(template_values))
 
-    def post(self):
+    def post(self, url):
+
+        url = self.request.url
 
         gameID = self.request.get('gameID')
 
@@ -247,8 +249,8 @@ class GamePage(webapp2.RequestHandler):
 
         game.put()
 
-        query_params = {'game': gameID}
-        self.redirect('/e/' + urllib.urlencode(query_params))
+        #query_params = {'game': gameID}
+        self.redirect(url + '/currentuserid')
 
 class SignedUp(webapp2.RequestHandler):
 
