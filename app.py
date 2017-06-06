@@ -20,6 +20,7 @@ from tasks import *
 import os
 import urllib
 import logging
+import json
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
@@ -239,7 +240,10 @@ class GamePage(webapp2.RequestHandler):
         game = Game()
         game = game.get_by_id(gameID)
 
-        game.usersSignedUp.append('FUCK YA BABAAYYY!')
+        data = json.loads({'users': [{'1':'trenjohn'}]})
+
+        game.usersSignedUp.append(data)
+
 
         game.put()
 
