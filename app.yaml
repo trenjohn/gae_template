@@ -18,8 +18,8 @@ handlers:
 - url: /.*
   script: app.app
 
-- url: /tasks/create_games
-  login: admin
+# - url: /tasks/create_games
+#   login: admin
 # [END handlers]
 
 # [START libraries]
