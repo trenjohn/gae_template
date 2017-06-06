@@ -195,7 +195,7 @@ class CreateGames(webapp2.RequestHandler):
 
     def get(self):
 
-        al = Game.query(Game.numberPlayers == 10)
+        al = Game.query(Game.numberPlayers == 1)
 
         while al.count(limit=None) < 10:
             gspot = Game()
