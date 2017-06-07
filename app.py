@@ -260,6 +260,20 @@ class SignedUp(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/plain'
         self.response.write('You are signed up!')
 
+class Login(webapp2.RequestHandler):
+
+    def get(self):
+
+        template = JINJA_ENVIRONMENT.get_template('login.html')
+        self.response.write(template.render)
+
+class LoggedIn(webapp2.RequestHandler):
+
+    def get(self):
+
+        template = JINJA_ENVIRONMENT.get_template('loggedIn.html')
+        self.response.write(template.render)
+
 # [START app]
 app = webapp2.WSGIApplication([
     ('/', MainPage),
@@ -270,6 +284,7 @@ app = webapp2.WSGIApplication([
     ('/account', AccountPage),
     ('/tasks/create_games', CreateGames),
     ('/lobby', Lobby),
+    ('/loggedIn', LoggedIn),
     ('/g/(.*)', GamePage),
     ('/e/(.*)', SignedUp),
 ], debug=True)

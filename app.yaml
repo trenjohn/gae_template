@@ -15,12 +15,24 @@ handlers:
   static_files: contact.html
   upload: contact\.html
 
+- url: /login
+  static_files: login.html
+  upload: login\.html
+
+- url: /loggedIn
+  static_files: loggedIn.html
+  upload: loggedIn\.html
+
 - url: /.*
   script: app.app
 
 # - url: /tasks/create_games
 #   login: admin
 # [END handlers]
+
+env_variables:
+  # Replace with your Firebase project ID.
+  FIREBASE_PROJECT_ID: 'gae-template-1725f'
 
 # [START libraries]
 libraries:
