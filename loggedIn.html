@@ -21,19 +21,24 @@
        firebase.initializeApp(config);
     </script>
     <script type="text/javascript">
-      var uid;
-      var email;
       initApp = function() {
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
             // User is signed in.
             var displayName = user.displayName;
-            email = user.email;
+            var email = user.email;
             var emailVerified = user.emailVerified;
             var photoURL = user.photoURL;
-            uid = user.uid;
+            var uid = user.uid;
             var phoneNumber = user.phoneNumber;
             var providerData = user.providerData;
+
+            var http = new XMLHttpRequest();
+            var url = "https://neural-water-169201.appspot.com/loggedIn";
+            var params = JSON.stringify({ uid: uid, email: email }, null, '  ');
+            http.open("POST", url, true);
+            http.setRequestHeader("Content-type", "application/json");
+            http.send(params);
 
             user.getToken().then(function(accessToken) {
               document.getElementById('sign-in-status').textContent = 'Signed in';
@@ -63,25 +68,6 @@
       window.addEventListener('load', function() {
         initApp()
       });
-    </script>
-
-    <script>
-      var http = new XMLHttpRequest();
-      var url = "https://neural-water-169201.appspot.com/loggedIn";
-      var params = JSON.stringify({ uid: uid, email: email }, null, '  ');
-
-      http.open("POST", url, true);
-
-      //Send the proper header information along with the request
-      http.setRequestHeader("Content-type", "application/json");
-
-      http.onreadystatechange = function() {//Call a function when the state changes.
-          if(http.status == 200) {
-              //alert(http.responseText);
-              http.send(params);
-          }
-      }
-      //http.send(params);
     </script>
   </head>
   <body>
