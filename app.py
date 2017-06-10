@@ -291,7 +291,9 @@ class LoggedIn(webapp2.RequestHandler):
     def post(self):
 
         json = self.request.get_json()
-        logging.info(json)
+        logging.critical('Im fucking here.')
+        logger.critical('JSON: %s', json)
+        logging.critical(json)
 
         uid = json['uid']
         email = json['email']
