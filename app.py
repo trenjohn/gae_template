@@ -290,7 +290,9 @@ class LoggedIn(webapp2.RequestHandler):
 
     def post(self):
 
-        data = json.loads(self.request.body)
+        self.redirect('https://neural-water-169201.appspot.com/lobby')
+
+        # data = json.loads(self.request.body)
 
 
         # json = self.request.get_json()
@@ -299,14 +301,14 @@ class LoggedIn(webapp2.RequestHandler):
         # log.critical('JSON: %s', json)
         # log.critical(json)
 
-        uid = data['uid']
-        email = data['email']
-
-        a = Account()
-
-        a.uid = uid
-        a.email = email
-        result = a.put()
+        # uid = data['uid']
+        # email = data['email']
+        #
+        # a = Account()
+        #
+        # a.uid = uid
+        # a.email = email
+        # result = a.put()
 
 
 
