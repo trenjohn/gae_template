@@ -288,6 +288,32 @@ class LoggedIn(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('loggedIn.html')
         self.response.write(template.render)
 
+    def post(self):
+
+        json = self.request.get_json()
+        uid = json['uid']
+
+        a = Account()
+        result = a.get_by_id(uid)
+
+        logging.info(result)
+        # gameID = os.path.basename(os.path.normpath(url))
+        # gameID = int(gameID)
+        # game = Game()
+        # game = game.get_by_id(gameID)
+
+        #data = json.loads({'users': [{'1':'trenjohn'}]})
+
+        # current = game.usersSignedUp
+        # new = current + 1
+        #
+        # game.usersSignedUp = new
+        #
+        # result = game.put()
+
+        #query_params = {'game': gameID}
+        # self.redirect(url)
+
 # [START app]
 app = webapp2.WSGIApplication([
     ('/', MainPage),
