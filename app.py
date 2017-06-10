@@ -271,6 +271,20 @@ class LoggedIn(webapp2.RequestHandler):
 
     def get(self):
 
+        data = self.request.get_json()
+        displayName = data['displayName']
+        email = data['email']
+        uid = data['uid']
+
+        a = Account()
+        a.displayName = displayName
+        a.email = email
+        a.uid = uid
+        result = a.put()
+
+        #logging.info("%s", str(data))
+        logging.info('hello world!')
+
         template = JINJA_ENVIRONMENT.get_template('loggedIn.html')
         self.response.write(template.render)
 

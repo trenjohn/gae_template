@@ -28,10 +28,10 @@ class UserGames(ndb.Model):
     gameKey = ndb.KeyProperty(Game, repeated=True)
 
 class Account(ndb.Model):
-    firstName = ndb.StringProperty()
-    lastName = ndb.StringProperty()
+    displayName = ndb.StringProperty()
     email = ndb.StringProperty()
-    userGames = ndb.KeyProperty(kind=UserGames)
+    #userGames = ndb.KeyProperty(kind=UserGames)
+    uid = ndb.KeyProperty()
     # phone =
     # Street Address
     # City
