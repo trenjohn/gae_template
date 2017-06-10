@@ -22,12 +22,13 @@
     </script>
     <script type="text/javascript">
       var uid;
+      var email;
       initApp = function() {
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
             // User is signed in.
             var displayName = user.displayName;
-            var email = user.email;
+            email = user.email;
             var emailVerified = user.emailVerified;
             var photoURL = user.photoURL;
             uid = user.uid;
@@ -67,7 +68,7 @@
     <script>
       var http = new XMLHttpRequest();
       var url = "https://neural-water-169201.appspot.com/loggedIn";
-      var params = JSON.stringify({ uid: uid }, null, '  ');
+      var params = JSON.stringify({ uid: uid, email: email }, null, '  ');
 
       http.open("POST", url, true);
 

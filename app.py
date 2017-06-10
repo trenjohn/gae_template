@@ -292,9 +292,21 @@ class LoggedIn(webapp2.RequestHandler):
 
         json = self.request.get_json()
         uid = json['uid']
+        email = json['email']
 
         a = Account()
-        result = a.get_by_id(uid)
+
+        #result = a.get_by_id(uid)
+
+        query = Account.query(Account.uid == uid)
+
+        if query == 'None':
+            a.uid = uid
+            a.email = email
+            result = a.put()
+        else:
+            result = query.get()
+
 
         logging.info(result)
         # gameID = os.path.basename(os.path.normpath(url))

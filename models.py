@@ -28,7 +28,7 @@ class UserGames(ndb.Model):
     gameKey = ndb.KeyProperty(Game, repeated=True)
 
 class Account(ndb.Model):
-    displayName = ndb.StringProperty()
+    #displayName = ndb.StringProperty()
     email = ndb.StringProperty()
     #userGames = ndb.KeyProperty(kind=UserGames)
     uid = ndb.KeyProperty()
