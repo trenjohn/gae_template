@@ -290,30 +290,39 @@ class LoggedIn(webapp2.RequestHandler):
 
     def post(self):
 
-        json = self.request.get_json()
-        log = logging.getLogger("my-logger")
-        log.critical('Im fucking here.')
-        log.critical('JSON: %s', json)
-        log.critical(json)
+        data = json.loads(self.request.body)
 
-        uid = json['uid']
-        email = json['email']
+
+        # json = self.request.get_json()
+        # log = logging.getLogger("my-logger")
+        # log.critical('Im fucking here.')
+        # log.critical('JSON: %s', json)
+        # log.critical(json)
+
+        uid = data['uid']
+        email = data['email']
 
         a = Account()
 
+        a.uid = uid
+        a.email = email
+        result = a.put()
+
+
+
         #result = a.get_by_id(uid)
 
-        query = Account.query(Account.uid == uid)
-
-        if query == 'None':
-            a.uid = uid
-            a.email = email
-            result = a.put()
-        else:
-            result = query.get()
-
-
-        logging.info(result)
+        # query = Account.query(Account.uid == uid)
+        #
+        # if query == 'None':
+        #     a.uid = uid
+        #     a.email = email
+        #     result = a.put()
+        # else:
+        #     result = query.get()
+        #
+        #
+        # logging.info(result)
         # gameID = os.path.basename(os.path.normpath(url))
         # gameID = int(gameID)
         # game = Game()
